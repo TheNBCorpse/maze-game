@@ -1,0 +1,28 @@
+{
+	"name": "path_alignment",
+	"plugin-id": "TiledBg",
+	"sid": 303566253985776,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 901494267551793
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 400,
+		"height": 400,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "lossless",
+		"exportQuality": 0.8,
+		"fileType": "image/png",
+		"imageSpriteId": 3134674,
+		"useCollisionPoly": true,
+		"tag": ""
+	}
+}

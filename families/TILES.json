@@ -1,0 +1,16 @@
+{
+	"name": "TILES",
+	"plugin-id": "Sprite",
+	"sid": 276446252453611,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"path_tile_basic",
+		"path_tile_wall",
+		"path_tile_entrance",
+		"path_tile_room",
+		"path_tile_far",
+		"path_tile_farthest"
+	]
+}

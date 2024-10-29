@@ -1,0 +1,13 @@
+{
+	"name": "NODES",
+	"plugin-id": "Sprite",
+	"sid": 954736012320472,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"path_node",
+		"path_subsubnode",
+		"path_subnode"
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"name": "record",
+	"plugin-id": "GameRecorder",
+	"sid": 754275263450211,
+	"singleglobal-inst": {
+		"type": "record",
+		"properties": {},
+		"uid": 6,
+		"sid": 989042826127060,
+		"tags": ""
+	}
+}

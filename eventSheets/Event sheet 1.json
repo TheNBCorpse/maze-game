@@ -1,0 +1,4126 @@
+{
+	"name": "Event sheet 1",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "waittime",
+			"type": "number",
+			"initialValue": "0.001",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 628508272920856
+		},
+		{
+			"eventType": "variable",
+			"name": "subpaths",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 439950036658394
+		},
+		{
+			"eventType": "variable",
+			"name": "subnode_times",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 947846227535633
+		},
+		{
+			"eventType": "variable",
+			"name": "subsubpaths",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 376825069863121
+		},
+		{
+			"eventType": "variable",
+			"name": "subsubnode_times",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 629488559690388
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "controls",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 340713972860791
+						}
+					],
+					"actions": [
+						{
+							"id": "scroll-to-position",
+							"objectClass": "System",
+							"sid": 232393864290235,
+							"parameters": {
+								"x": "9600",
+								"y": "5400"
+							}
+						}
+					],
+					"sid": 480844789490054
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "keyboard",
+							"sid": 475932112529031,
+							"parameters": {
+								"key": 27
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "close",
+							"objectClass": "browser",
+							"sid": 316198741614577
+						}
+					],
+					"sid": 588779634169007
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "keyboard",
+							"sid": 199887355274120,
+							"parameters": {
+								"key": 13
+							}
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 827436353201420,
+							"disabled": true,
+							"parameters": {
+								"first-value": "path_tile_entrance.Count",
+								"comparison": 5,
+								"second-value": "2"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 407314728470625,
+							"parameters": {
+								"type": "warn",
+								"message": "\"beginning generation\""
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "NODES",
+							"sid": 566616509480505
+						},
+						{
+							"id": "destroy",
+							"objectClass": "TILES",
+							"sid": 764135838378344
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 257949900127358,
+							"parameters": {
+								"object-to-create": "path_node",
+								"layer": "1",
+								"x": "0",
+								"y": "random(2000, 8800)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 923066907706834,
+							"disabled": true,
+							"parameters": {
+								"type": "log",
+								"message": "\"node created\""
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "path_node",
+							"sid": 336479738071799,
+							"parameters": {
+								"instance-variable": "picked",
+								"value": "true"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 546540485845520,
+							"disabled": true,
+							"parameters": {
+								"type": "log",
+								"message": "\"node picked\""
+							}
+						},
+						{
+							"id": "stop-all-timers",
+							"objectClass": "path_alignment",
+							"sid": 827640740121683,
+							"behaviorType": "Timer"
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 369445403036408,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "3.0",
+								"type": "once",
+								"tag": "\"primary\""
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 581294001672409,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "10.0",
+								"type": "once",
+								"tag": "\"farthest\""
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 734736937387485,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"callFunction": "Generate node",
+							"sid": 241995254874826
+						}
+					],
+					"sid": 167198394791998
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "keyboard",
+							"sid": 855744404181910,
+							"parameters": {
+								"key": 45
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "start-recording-2",
+							"objectClass": "record",
+							"sid": 579147524107857,
+							"parameters": {
+								"container": "webm",
+								"video-codec": "auto",
+								"framerate": "30",
+								"audio-codec": "auto",
+								"quality-kbps": "1000"
+							}
+						}
+					],
+					"sid": 154500374110823
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "keyboard",
+							"sid": 742102113474886,
+							"parameters": {
+								"key": 46
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "stop-recording",
+							"objectClass": "record",
+							"sid": 170300032759327
+						}
+					],
+					"sid": 362683961298540
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-recording-ready",
+							"objectClass": "record",
+							"sid": 219319592613668
+						}
+					],
+					"actions": [
+						{
+							"id": "invoke-download",
+							"objectClass": "browser",
+							"sid": 454011700806960,
+							"parameters": {
+								"url": "record.RecordingURL",
+								"filename": "\"path\""
+							}
+						}
+					],
+					"sid": 285346266948106
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "keyboard",
+							"sid": 159629484313378,
+							"parameters": {
+								"key": 34
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 224784314967009,
+							"parameters": {
+								"variable": "waittime",
+								"value": "5/60"
+							}
+						}
+					],
+					"sid": 947811925551815,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "keyboard",
+							"sid": 667479110403052,
+							"parameters": {
+								"key": 33
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 612995954705178,
+							"parameters": {
+								"variable": "waittime",
+								"value": "1/60"
+							}
+						}
+					],
+					"sid": 849743737312096,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "keyboard",
+							"sid": 447390440329581,
+							"parameters": {
+								"key": 34
+							},
+							"isInverted": true
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "keyboard",
+							"sid": 108041059694644,
+							"parameters": {
+								"key": 33
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 916114633474814,
+							"parameters": {
+								"variable": "waittime",
+								"value": "2/60"
+							}
+						}
+					],
+					"sid": 667884592858254,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "path_alignment",
+							"sid": 538034000946166,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"primary\""
+							}
+						},
+						{
+							"id": "on-timer",
+							"objectClass": "path_alignment",
+							"sid": 560906134051202,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"sub\""
+							}
+						},
+						{
+							"id": "on-timer",
+							"objectClass": "path_alignment",
+							"sid": 444691787717322,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"subsub\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 902910423154922,
+							"parameters": {
+								"type": "error",
+								"message": "\"nodes failed to generate, overriding\""
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "NODES",
+							"sid": 245874204115494
+						},
+						{
+							"id": "destroy",
+							"objectClass": "TILES",
+							"sid": 216857217494042
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 645684200710898,
+							"parameters": {
+								"object-to-create": "path_node",
+								"layer": "1",
+								"x": "0",
+								"y": "random(2000, 8800)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "path_node",
+							"sid": 369504478767837,
+							"parameters": {
+								"instance-variable": "picked",
+								"value": "true"
+							}
+						},
+						{
+							"id": "stop-all-timers",
+							"objectClass": "path_alignment",
+							"sid": 834796979440294,
+							"behaviorType": "Timer"
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 368587535976151,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "3.0",
+								"type": "once",
+								"tag": "\"primary\""
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 431222783058279,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "10.0",
+								"type": "once",
+								"tag": "\"farthest\""
+							}
+						},
+						{
+							"id": "reset-global-variables",
+							"objectClass": "System",
+							"sid": 352984601546136,
+							"parameters": {
+								"reset-static": true
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 736668231658851,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"callFunction": "Generate node",
+							"sid": 109808005584369
+						}
+					],
+					"sid": 837219923621237,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "path_alignment",
+							"sid": 349519538359326,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"farthest\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 564274435803653,
+							"parameters": {
+								"type": "error",
+								"message": "\"tiles failed to generate, overriding\""
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "NODES",
+							"sid": 576602393622502
+						},
+						{
+							"id": "destroy",
+							"objectClass": "TILES",
+							"sid": 291631875893115
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 660086149153362,
+							"parameters": {
+								"object-to-create": "path_node",
+								"layer": "1",
+								"x": "0",
+								"y": "random(2000, 8800)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "path_node",
+							"sid": 312178458845083,
+							"parameters": {
+								"instance-variable": "picked",
+								"value": "true"
+							}
+						},
+						{
+							"id": "stop-all-timers",
+							"objectClass": "path_alignment",
+							"sid": 830037098569390,
+							"behaviorType": "Timer"
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 763612636868248,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "3.0",
+								"type": "once",
+								"tag": "\"primary\""
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 826218905407504,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "10.0",
+								"type": "once",
+								"tag": "\"farthest\""
+							}
+						},
+						{
+							"id": "reset-global-variables",
+							"objectClass": "System",
+							"sid": 294580406407099,
+							"parameters": {
+								"reset-static": true
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 909383337693489,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"callFunction": "Generate node",
+							"sid": 763851851436972
+						}
+					],
+					"sid": 489282514910336
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "path_alignment",
+							"sid": 803688987861670,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"sub\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 315547641569521,
+							"parameters": {
+								"type": "error",
+								"message": "\"subnodes failed to generate, force overriding\""
+							}
+						},
+						{
+							"id": "set-opacity",
+							"objectClass": "path_node",
+							"sid": 466614349448530,
+							"parameters": {
+								"opacity": "50"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 645904964543641,
+							"parameters": {
+								"variable": "subpaths",
+								"value": "round(random(10, 15) * (path_node.Count / 15))"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 277717444605724,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "5.0",
+								"type": "once",
+								"tag": "\"sub\""
+							}
+						},
+						{
+							"id": "reset-global-variables",
+							"objectClass": "System",
+							"sid": 334209159030214,
+							"parameters": {
+								"reset-static": true
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 236285901903124,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"callFunction": "Begin subnode path",
+							"sid": 315199077759731
+						}
+					],
+					"sid": 881280365418350,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "path_alignment",
+							"sid": 911279583583936,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"subsub\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 106283094792595,
+							"parameters": {
+								"type": "error",
+								"message": "\"subsubnodes failed to generate, force overriding\""
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 585092034688852,
+							"parameters": {
+								"variable": "subsubpaths",
+								"value": "random(15, 25)"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 969964062749088,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "5.0",
+								"type": "once",
+								"tag": "\"subsub\""
+							}
+						},
+						{
+							"id": "reset-global-variables",
+							"objectClass": "System",
+							"sid": 419538872236562,
+							"parameters": {
+								"reset-static": true
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 430370091089875,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"callFunction": "Begin subsubnode path",
+							"sid": 486398712271228
+						}
+					],
+					"sid": 437706315412622,
+					"disabled": true
+				}
+			],
+			"sid": 526814922759225
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "primary nodes",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "Generate node",
+					"functionDescription": "Generates the next node step in the path.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 752569728357436,
+							"parameters": {
+								"object": "path_node",
+								"expression": "path_node.picked"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 856007258970669,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 547546207877327,
+									"parameters": {
+										"first-value": "path_node.ImagePointX(2)",
+										"comparison": 2,
+										"second-value": "LayoutWidth"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "spawn-another-object",
+									"objectClass": "path_node",
+									"sid": 391288164708195,
+									"parameters": {
+										"object": "path_node",
+										"layer": "1",
+										"image-point": "2",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "browser",
+									"sid": 646841143368595,
+									"disabled": true,
+									"parameters": {
+										"type": "log",
+										"message": "\"node created\""
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 848865016662663,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Rotate node",
+									"sid": 846639301198779
+								}
+							],
+							"sid": 295036380872963
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 864098364961818,
+									"parameters": {
+										"first-value": "path_node.ImagePointX(2)",
+										"comparison": 5,
+										"second-value": "LayoutWidth"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 285350255422226,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Primary nodes finished",
+									"sid": 598765325170328
+								}
+							],
+							"sid": 133038197695202
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-highest-lowest-value",
+									"objectClass": "System",
+									"sid": 712230949952118,
+									"parameters": {
+										"object": "path_node",
+										"which": "highest",
+										"expression": "path_node.UID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-angle",
+									"objectClass": "path_node",
+									"sid": 728869148154625,
+									"parameters": {
+										"angle": "Self.Angle + random(-15, 15)"
+									}
+								}
+							],
+							"sid": 985458196969364,
+							"disabled": true
+						}
+					]
+				},
+				{
+					"functionName": "Rotate node",
+					"functionDescription": "Rotates the current node.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-last-created",
+							"objectClass": "System",
+							"sid": 330322769560370,
+							"parameters": {
+								"object": "path_node"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 442895835448626,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 537071428315450,
+									"parameters": {
+										"first-value": "path_node.ImagePointX(2)",
+										"comparison": 2,
+										"second-value": "LayoutWidth"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-angle",
+									"objectClass": "path_node",
+									"sid": 990572875620120,
+									"parameters": {
+										"angle": "Self.Angle + random(-45, 45)"
+									}
+								},
+								{
+									"id": "rotate-toward-position",
+									"objectClass": "path_node",
+									"sid": 754235331101447,
+									"parameters": {
+										"degrees": "random(0, 5)",
+										"x": "LayoutWidth",
+										"y": "Self.X"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "browser",
+									"sid": 105812793919448,
+									"disabled": true,
+									"parameters": {
+										"type": "log",
+										"message": "\"node rotated\""
+									}
+								}
+							],
+							"sid": 951991164197517,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 704527416045717,
+											"parameters": {
+												"object": "path_node"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "path_node",
+											"sid": 639098430372073,
+											"parameters": {
+												"instance-variable": "picked",
+												"value": "false"
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "browser",
+											"sid": 605307644103468,
+											"disabled": true,
+											"parameters": {
+												"type": "log",
+												"message": "\"node deselected\""
+											}
+										}
+									],
+									"sid": 839570845956537,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 255360086025002,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"callFunction": "Analyze node",
+													"sid": 370262948517832
+												}
+											],
+											"sid": 538178242791790
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 903934161295971,
+									"parameters": {
+										"first-value": "path_node.ImagePointX(2)",
+										"comparison": 5,
+										"second-value": "LayoutWidth"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 880815977158694,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Primary nodes finished",
+									"sid": 760477645302751
+								}
+							],
+							"sid": 673533938156674
+						}
+					]
+				},
+				{
+					"functionName": "Analyze node",
+					"functionDescription": "Make sure the current node is within bounds.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-last-created",
+							"objectClass": "System",
+							"sid": 456173410183717,
+							"parameters": {
+								"object": "path_node"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 102261422455781,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 239083181480490,
+									"parameters": {
+										"first-value": "path_node.ImagePointX(2)",
+										"comparison": 2,
+										"second-value": "LayoutWidth"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 975949386045200,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 648827207601958,
+											"parameters": {
+												"first-value": "path_node.ImagePointY(2)",
+												"comparison": 3,
+												"second-value": "0"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 431106605091353,
+											"parameters": {
+												"first-value": "path_node.ImagePointY(2)",
+												"comparison": 5,
+												"second-value": "LayoutHeight"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 917151684981736,
+											"parameters": {
+												"first-value": "path_node.ImagePointX(2)",
+												"comparison": 3,
+												"second-value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "rotate-toward-position",
+											"objectClass": "path_node",
+											"sid": 426174998687768,
+											"parameters": {
+												"degrees": "random(10, 15)",
+												"x": "LayoutWidth",
+												"y": "LayoutHeight / 2"
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "browser",
+											"sid": 335821473776401,
+											"disabled": true,
+											"parameters": {
+												"type": "log",
+												"message": "\"node adjusted\""
+											}
+										},
+										{
+											"id": "wait",
+											"objectClass": "System",
+											"sid": 825297371942797,
+											"parameters": {
+												"seconds": "waittime"
+											}
+										},
+										{
+											"callFunction": "Analyze node",
+											"sid": 635596053146265
+										}
+									],
+									"sid": 441964480498856,
+									"isOrBlock": true
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 428964642286470
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "path_node",
+											"sid": 368868659985944,
+											"parameters": {
+												"instance-variable": "picked",
+												"value": "true"
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "browser",
+											"sid": 938207950771908,
+											"disabled": true,
+											"parameters": {
+												"type": "warn",
+												"message": "\"node finished\""
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "browser",
+											"sid": 421272725459222,
+											"disabled": true,
+											"parameters": {
+												"type": "log",
+												"message": "\"node picked\""
+											}
+										},
+										{
+											"id": "wait",
+											"objectClass": "System",
+											"sid": 436456858045947,
+											"disabled": true,
+											"parameters": {
+												"seconds": "waittime"
+											}
+										},
+										{
+											"callFunction": "Generate node",
+											"sid": 551909196916156
+										}
+									],
+									"sid": 828185861444630
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 909440675120803,
+									"parameters": {
+										"first-value": "path_node.ImagePointX(2)",
+										"comparison": 5,
+										"second-value": "LayoutWidth"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 862836890519602,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Primary nodes finished",
+									"sid": 839558123006713
+								}
+							],
+							"sid": 829872612124794
+						}
+					]
+				},
+				{
+					"functionName": "Primary nodes finished",
+					"functionDescription": "Begins subnode generation.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-opacity",
+							"objectClass": "path_node",
+							"sid": 883662817402506,
+							"parameters": {
+								"opacity": "50"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 933370797031499,
+							"parameters": {
+								"variable": "subpaths",
+								"value": "round(random(10, 15) * (path_node.Count / 15))"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 189148578142854,
+							"parameters": {
+								"type": "log",
+								"message": "\"all primary nodes finished (\" & path_node.Count & \")\""
+							}
+						},
+						{
+							"id": "stop-timer",
+							"objectClass": "path_alignment",
+							"sid": 700864015305234,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"primary\""
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "path_alignment",
+							"sid": 769132438594990,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "5.0",
+								"type": "once",
+								"tag": "\"sub\""
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 392671218115523,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"callFunction": "Begin subnode path",
+							"sid": 593971025496692
+						}
+					],
+					"sid": 750604920953579
+				}
+			],
+			"sid": 895454838566574
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "subnodes",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "Begin subnode path",
+					"functionDescription": "Begins a new subnode path.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 435553250517556,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 439185625582822,
+									"parameters": {
+										"variable": "subpaths",
+										"comparison": 4,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 574001844625118,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Generate subnode",
+									"sid": 522389203203269
+								}
+							],
+							"sid": 173113490578000
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 694653300286954,
+									"parameters": {
+										"variable": "subpaths",
+										"comparison": 3,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-opacity",
+									"objectClass": "path_subnode",
+									"sid": 861072280415941,
+									"parameters": {
+										"opacity": "50"
+									}
+								},
+								{
+									"id": "destroy",
+									"objectClass": "path_subnode",
+									"sid": 521264226862824,
+									"disabled": true
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 112586116115216,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								}
+							],
+							"sid": 961821327602549,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-outside-layout",
+											"objectClass": "path_subnode",
+											"sid": 101713390802580
+										}
+									],
+									"actions": [
+										{
+											"id": "destroy",
+											"objectClass": "path_subnode",
+											"sid": 131221303817666
+										}
+									],
+									"sid": 423443927568275,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 631641384627290,
+													"disabled": true,
+													"parameters": {
+														"variable": "subsubpaths",
+														"value": "round(random(15, 25) * clamp((path_subnode.Count / 100), 1, Infinity))"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 349986622070133,
+													"parameters": {
+														"variable": "subsubpaths",
+														"value": "random(15, 25)"
+													}
+												},
+												{
+													"id": "log",
+													"objectClass": "browser",
+													"sid": 267324922897744,
+													"parameters": {
+														"type": "log",
+														"message": "\"all subnodes finished (\" & path_subnode.Count & \")\""
+													}
+												},
+												{
+													"id": "stop-timer",
+													"objectClass": "path_alignment",
+													"sid": 315228332574483,
+													"behaviorType": "Timer",
+													"parameters": {
+														"tag": "\"sub\""
+													}
+												},
+												{
+													"id": "start-timer",
+													"objectClass": "path_alignment",
+													"sid": 301613853486134,
+													"behaviorType": "Timer",
+													"parameters": {
+														"duration": "5.0",
+														"type": "once",
+														"tag": "\"subsub\""
+													}
+												},
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 633361355248103,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"callFunction": "Begin subsubnode path",
+													"sid": 227256933803680
+												}
+											],
+											"sid": 150227582609978
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"functionName": "Generate subnode",
+					"functionDescription": "Generates the next subnode step in the path.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-random-instance",
+							"objectClass": "System",
+							"sid": 694903984038586,
+							"parameters": {
+								"object": "path_node"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-eventvar",
+							"objectClass": "System",
+							"sid": 139527434047487,
+							"parameters": {
+								"variable": "subpaths",
+								"value": "1"
+							}
+						},
+						{
+							"id": "spawn-another-object",
+							"objectClass": "path_node",
+							"sid": 175915838817036,
+							"parameters": {
+								"object": "path_subnode",
+								"layer": "1",
+								"image-point": "1",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 313861659711661,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "path_subnode",
+							"sid": 629787053703457,
+							"parameters": {
+								"angle": "choose((path_node.Angle - 90) + random(-45, 45), (path_node.Angle + 90) + random(-45, 45))"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "path_subnode",
+							"sid": 785693338674091,
+							"parameters": {
+								"instance-variable": "picked",
+								"value": "true"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 259340964650875,
+							"parameters": {
+								"variable": "subnode_times",
+								"value": "random(4, 6)"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 887559593424651,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"callFunction": "Generate subnode path",
+							"sid": 817111166051715
+						}
+					],
+					"sid": 106307158196575
+				},
+				{
+					"functionName": "Generate subnode path",
+					"functionDescription": "Generates a subnode path.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 734961446648124,
+							"parameters": {
+								"object": "path_subnode",
+								"expression": "path_subnode.picked"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 398124828860402,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 637688034469980,
+									"parameters": {
+										"variable": "subnode_times",
+										"comparison": 4,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "spawn-another-object",
+									"objectClass": "path_subnode",
+									"sid": 956552336979242,
+									"parameters": {
+										"object": "path_subnode",
+										"layer": "1",
+										"image-point": "2",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "subtract-from-eventvar",
+									"objectClass": "System",
+									"sid": 913099992456797,
+									"parameters": {
+										"variable": "subnode_times",
+										"value": "1"
+									}
+								}
+							],
+							"sid": 903369841661326,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 539825566782036,
+											"parameters": {
+												"object": "path_subnode"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "path_subnode",
+											"sid": 574305210485805,
+											"parameters": {
+												"instance-variable": "picked",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 924621258527302,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-last-created",
+													"objectClass": "System",
+													"sid": 317813228296839,
+													"parameters": {
+														"object": "path_subnode"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 543707515821476,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"id": "set-angle",
+													"objectClass": "path_subnode",
+													"sid": 234366797212734,
+													"parameters": {
+														"angle": "Self.Angle + random(-45, 45)"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "path_subnode",
+													"sid": 624146923751416,
+													"parameters": {
+														"instance-variable": "picked",
+														"value": "true"
+													}
+												},
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 626324961591303,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"callFunction": "Generate subnode path",
+													"sid": 330638146625400
+												}
+											],
+											"sid": 533889119099999
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 189389614241657,
+									"parameters": {
+										"variable": "subnode_times",
+										"comparison": 3,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 661276093909974,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Begin subnode path",
+									"sid": 914318219859110
+								}
+							],
+							"sid": 563302644351304
+						}
+					]
+				}
+			],
+			"sid": 366584386631791
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "subsubnodes",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "Begin subsubnode path",
+					"functionDescription": "Begins a new subsubnode path.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 804457179872163,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 902451039254267,
+									"parameters": {
+										"variable": "subsubpaths",
+										"comparison": 4,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 386757116837399,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Generate subsubnode",
+									"sid": 620831645154739
+								}
+							],
+							"sid": 903793173023963
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 264306172999739,
+									"parameters": {
+										"variable": "subsubpaths",
+										"comparison": 3,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-opacity",
+									"objectClass": "path_subsubnode",
+									"sid": 691881536683933,
+									"parameters": {
+										"opacity": "50"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 926977090235370,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								}
+							],
+							"sid": 183081946099126,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-outside-layout",
+											"objectClass": "path_subsubnode",
+											"sid": 944063619389862
+										}
+									],
+									"actions": [
+										{
+											"id": "destroy",
+											"objectClass": "path_subsubnode",
+											"sid": 846970666579121
+										}
+									],
+									"sid": 211099007900760,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "log",
+													"objectClass": "browser",
+													"sid": 842225468398621,
+													"parameters": {
+														"type": "log",
+														"message": "\"all subsubnodes finished (\" & path_subsubnode.Count & \")\""
+													}
+												},
+												{
+													"id": "stop-timer",
+													"objectClass": "path_alignment",
+													"sid": 761588017041088,
+													"behaviorType": "Timer",
+													"parameters": {
+														"tag": "\"subsub\""
+													}
+												},
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 708149738691370,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"callFunction": "All nodes generated",
+													"sid": 391153165858146
+												}
+											],
+											"sid": 773347091367683
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"functionName": "Generate subsubnode",
+					"functionDescription": "Generates the next subsubnode step in the path.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-random-instance",
+							"objectClass": "System",
+							"sid": 363660109768904,
+							"parameters": {
+								"object": "path_subnode"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-eventvar",
+							"objectClass": "System",
+							"sid": 802767463002471,
+							"parameters": {
+								"variable": "subsubpaths",
+								"value": "1"
+							}
+						},
+						{
+							"id": "spawn-another-object",
+							"objectClass": "path_subnode",
+							"sid": 976370467583406,
+							"parameters": {
+								"object": "path_subsubnode",
+								"layer": "1",
+								"image-point": "1",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 840811697305844,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "path_subsubnode",
+							"sid": 113847886946701,
+							"parameters": {
+								"angle": "choose((path_subnode.Angle - 90) + random(-45, 45), (path_subnode.Angle + 90) + random(-45, 45))"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "path_subsubnode",
+							"sid": 431475572516552,
+							"parameters": {
+								"instance-variable": "picked",
+								"value": "true"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 665929509267709,
+							"parameters": {
+								"variable": "subsubnode_times",
+								"value": "random(1, 3)"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 876811804041498,
+							"parameters": {
+								"seconds": "waittime"
+							}
+						},
+						{
+							"callFunction": "Generate subsubnode path",
+							"sid": 268512480547277
+						}
+					],
+					"sid": 625342065966872
+				},
+				{
+					"functionName": "Generate subsubnode path",
+					"functionDescription": "Generates a subsubnode path.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 577714791968563,
+							"parameters": {
+								"object": "path_subsubnode",
+								"expression": "path_subsubnode.picked"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 675681090287198,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 415855939457645,
+									"parameters": {
+										"variable": "subsubnode_times",
+										"comparison": 4,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "spawn-another-object",
+									"objectClass": "path_subsubnode",
+									"sid": 744119673930456,
+									"parameters": {
+										"object": "path_subsubnode",
+										"layer": "1",
+										"image-point": "2",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "subtract-from-eventvar",
+									"objectClass": "System",
+									"sid": 129876049256561,
+									"parameters": {
+										"variable": "subsubnode_times",
+										"value": "1"
+									}
+								}
+							],
+							"sid": 414905513072049,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 289377884621322,
+											"parameters": {
+												"object": "path_subsubnode"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "path_subsubnode",
+											"sid": 781667987620151,
+											"parameters": {
+												"instance-variable": "picked",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 901656842599304,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-last-created",
+													"objectClass": "System",
+													"sid": 467289345043744,
+													"parameters": {
+														"object": "path_subsubnode"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 781202746650836,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"id": "set-angle",
+													"objectClass": "path_subsubnode",
+													"sid": 665290913397167,
+													"parameters": {
+														"angle": "Self.Angle + random(-45, 45)"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "path_subsubnode",
+													"sid": 748280452843772,
+													"parameters": {
+														"instance-variable": "picked",
+														"value": "true"
+													}
+												},
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 922146097496196,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"callFunction": "Generate subsubnode path",
+													"sid": 132942188531901
+												}
+											],
+											"sid": 411815312359386
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 698587542223153,
+									"parameters": {
+										"variable": "subsubnode_times",
+										"comparison": 3,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 373240934869757,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Begin subsubnode path",
+									"sid": 299622571822810
+								}
+							],
+							"sid": 494868038145442
+						}
+					]
+				}
+			],
+			"sid": 428383329555026
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "units",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "All nodes generated",
+					"functionDescription": "All nodes have been generated and tile generation can begin.",
+					"functionCategory": "Nodes",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 861260708078641,
+							"parameters": {
+								"variable": "loopindexX",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 812601174509939,
+							"parameters": {
+								"variable": "loopindexY",
+								"value": "0"
+							}
+						},
+						{
+							"callFunction": "Generate tiles",
+							"sid": 129131515982707
+						}
+					],
+					"sid": 450504419597570,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 961425006258583,
+									"parameters": {
+										"object": "path_node"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-opacity",
+									"objectClass": "path_node",
+									"sid": 664451744546906,
+									"parameters": {
+										"opacity": "100"
+									}
+								}
+							],
+							"sid": 589976302422997
+						}
+					]
+				},
+				{
+					"eventType": "variable",
+					"name": "loopindexX",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 769907725813081
+				},
+				{
+					"eventType": "variable",
+					"name": "loopindexY",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 764342921896631
+				},
+				{
+					"functionName": "Generate tiles",
+					"functionDescription": "Generate tiles based on the path nodes.",
+					"functionCategory": "Tiles",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 656128872292414,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 114752044568085,
+									"parameters": {
+										"variable": "loopindexX",
+										"comparison": 2,
+										"value": "LayoutWidth"
+									}
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 296512878190872,
+									"parameters": {
+										"variable": "loopindexY",
+										"comparison": 2,
+										"value": "LayoutHeight"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 481849465479053,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 416741417160802,
+											"parameters": {
+												"variable": "loopindexX",
+												"comparison": 2,
+												"value": "LayoutWidth"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 855135165398098,
+											"parameters": {
+												"object-to-create": "path_tile_basic",
+												"layer": "0",
+												"x": "loopindexX",
+												"y": "loopindexY",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 217936444683975,
+											"parameters": {
+												"variable": "loopindexX",
+												"value": "400"
+											}
+										}
+									],
+									"sid": 545939300354815,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "is-overlapping-another-object",
+													"objectClass": "path_tile_basic",
+													"sid": 164866919581368,
+													"parameters": {
+														"object": "NODES"
+													},
+													"isInverted": true
+												}
+											],
+											"actions": [
+												{
+													"id": "spawn-another-object",
+													"objectClass": "path_tile_basic",
+													"sid": 512392584124228,
+													"parameters": {
+														"object": "path_tile_wall",
+														"layer": "0",
+														"image-point": "0",
+														"create-hierarchy": false,
+														"template-name": "\"\""
+													}
+												},
+												{
+													"id": "destroy",
+													"objectClass": "path_tile_basic",
+													"sid": 264433041817066
+												}
+											],
+											"sid": 778353424280073
+										},
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 101921193484142,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"callFunction": "Generate tiles",
+													"sid": 900287923437521
+												}
+											],
+											"sid": 386919836608971
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 508976338945529,
+											"parameters": {
+												"variable": "loopindexX",
+												"comparison": 5,
+												"value": "LayoutWidth"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 107179744463306,
+											"parameters": {
+												"variable": "loopindexY",
+												"value": "400"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 742317936239634,
+											"parameters": {
+												"variable": "loopindexX",
+												"value": "0"
+											}
+										},
+										{
+											"id": "wait",
+											"objectClass": "System",
+											"sid": 609053340187648,
+											"parameters": {
+												"seconds": "waittime"
+											}
+										},
+										{
+											"callFunction": "Generate tiles",
+											"sid": 531445798704731
+										}
+									],
+									"sid": 667506345049393
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 971620665753261,
+									"parameters": {
+										"variable": "loopindexY",
+										"comparison": 5,
+										"value": "LayoutHeight"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "browser",
+									"sid": 592256971625988,
+									"parameters": {
+										"type": "log",
+										"message": "\"map created\""
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 404370350567671,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 165022197347649,
+									"parameters": {
+										"variable": "loopindexX",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 144640392170872,
+									"parameters": {
+										"variable": "loopindexY",
+										"value": "0"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 369645965732163,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Render tiles",
+									"sid": 601145482264962
+								}
+							],
+							"sid": 590212216551283
+						}
+					]
+				},
+				{
+					"functionName": "Render tiles",
+					"functionDescription": "Removes redundant walls and adds physical tiles.",
+					"functionCategory": "Tiles",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 447350731738879,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 288878602375100,
+									"parameters": {
+										"variable": "loopindexX",
+										"comparison": 2,
+										"value": "LayoutWidth"
+									}
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 247226192448968,
+									"parameters": {
+										"variable": "loopindexY",
+										"comparison": 2,
+										"value": "LayoutHeight"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 724507001999056,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 202651304006291,
+											"parameters": {
+												"variable": "loopindexX",
+												"comparison": 2,
+												"value": "LayoutWidth"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 937787333876695,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-x",
+													"objectClass": "path_tile_wall",
+													"sid": 252246787475933,
+													"parameters": {
+														"comparison": 0,
+														"x-co-ordinate": "loopindexX"
+													}
+												},
+												{
+													"id": "compare-y",
+													"objectClass": "path_tile_wall",
+													"sid": 978420711627821,
+													"parameters": {
+														"comparison": 0,
+														"y-co-ordinate": "loopindexY"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 800384709818622,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "pick-nearestfurthest",
+															"objectClass": "path_tile_basic",
+															"sid": 950843546212808,
+															"parameters": {
+																"which": "nearest",
+																"x": "path_tile_wall.X",
+																"y": "path_tile_wall.Y"
+															}
+														}
+													],
+													"actions": [],
+													"sid": 657356230087524,
+													"children": [
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "compare-two-values",
+																	"objectClass": "System",
+																	"sid": 754410971647312,
+																	"parameters": {
+																		"first-value": "distance(path_tile_wall.X, path_tile_wall.Y, path_tile_basic.X, path_tile_basic.Y)",
+																		"comparison": 4,
+																		"second-value": "500"
+																	}
+																}
+															],
+															"actions": [
+																{
+																	"id": "destroy",
+																	"objectClass": "path_tile_wall",
+																	"sid": 666580473662426
+																},
+																{
+																	"id": "add-to-eventvar",
+																	"objectClass": "System",
+																	"sid": 778350056909163,
+																	"parameters": {
+																		"variable": "loopindexX",
+																		"value": "400"
+																	}
+																},
+																{
+																	"id": "wait",
+																	"objectClass": "System",
+																	"sid": 336725268668240,
+																	"parameters": {
+																		"seconds": "waittime"
+																	}
+																},
+																{
+																	"callFunction": "Render tiles",
+																	"sid": 470833376171243
+																}
+															],
+															"sid": 579853294704030
+														},
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "compare-two-values",
+																	"objectClass": "System",
+																	"sid": 154505959184117,
+																	"parameters": {
+																		"first-value": "distance(path_tile_wall.X, path_tile_wall.Y, path_tile_basic.X, path_tile_basic.Y)",
+																		"comparison": 2,
+																		"second-value": "500"
+																	}
+																}
+															],
+															"actions": [
+																{
+																	"id": "add-to-eventvar",
+																	"objectClass": "System",
+																	"sid": 708191923460754,
+																	"parameters": {
+																		"variable": "loopindexX",
+																		"value": "400"
+																	}
+																},
+																{
+																	"id": "wait",
+																	"objectClass": "System",
+																	"sid": 801129389645897,
+																	"parameters": {
+																		"seconds": "waittime"
+																	}
+																},
+																{
+																	"callFunction": "Render tiles",
+																	"sid": 764044598615640
+																}
+															],
+															"sid": 853597177497225
+														}
+													]
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-x",
+													"objectClass": "path_tile_basic",
+													"sid": 556642206197966,
+													"parameters": {
+														"comparison": 0,
+														"x-co-ordinate": "loopindexX"
+													}
+												},
+												{
+													"id": "compare-y",
+													"objectClass": "path_tile_basic",
+													"sid": 379002136115516,
+													"parameters": {
+														"comparison": 0,
+														"y-co-ordinate": "loopindexY"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 104973878117126,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-x",
+															"objectClass": "path_tile_basic",
+															"sid": 378721688265544,
+															"parameters": {
+																"comparison": 0,
+																"x-co-ordinate": "0"
+															}
+														}
+													],
+													"actions": [],
+													"sid": 472344070197388,
+													"children": [
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "is-overlapping-another-object",
+																	"objectClass": "path_tile_basic",
+																	"sid": 616480315395057,
+																	"parameters": {
+																		"object": "path_node"
+																	}
+																},
+																{
+																	"id": "compare-x",
+																	"objectClass": "path_node",
+																	"sid": 188340070426208,
+																	"parameters": {
+																		"comparison": 0,
+																		"x-co-ordinate": "0"
+																	}
+																}
+															],
+															"actions": [
+																{
+																	"id": "create-object",
+																	"objectClass": "System",
+																	"sid": 521918598382983,
+																	"parameters": {
+																		"object-to-create": "path_tile_entrance",
+																		"layer": "0",
+																		"x": "path_tile_basic.X - 400",
+																		"y": "path_tile_basic.Y",
+																		"create-hierarchy": false,
+																		"template-name": "\"\""
+																	}
+																}
+															],
+															"sid": 983822766899451
+														},
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "else",
+																	"objectClass": "System",
+																	"sid": 923014165157179
+																}
+															],
+															"actions": [
+																{
+																	"id": "create-object",
+																	"objectClass": "System",
+																	"sid": 437444924455821,
+																	"parameters": {
+																		"object-to-create": "path_tile_wall",
+																		"layer": "0",
+																		"x": "path_tile_basic.X - 400",
+																		"y": "path_tile_basic.Y",
+																		"create-hierarchy": false,
+																		"template-name": "\"\""
+																	}
+																}
+															],
+															"sid": 786396719311305
+														}
+													]
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-y",
+															"objectClass": "path_tile_basic",
+															"sid": 220475050511195,
+															"parameters": {
+																"comparison": 0,
+																"y-co-ordinate": "0"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "create-object",
+															"objectClass": "System",
+															"sid": 791645549079247,
+															"parameters": {
+																"object-to-create": "path_tile_wall",
+																"layer": "0",
+																"x": "path_tile_basic.X",
+																"y": "path_tile_basic.Y - 400",
+																"create-hierarchy": false,
+																"template-name": "\"\""
+															}
+														}
+													],
+													"sid": 897149917661630
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-x",
+															"objectClass": "path_tile_basic",
+															"sid": 512743885171926,
+															"parameters": {
+																"comparison": 0,
+																"x-co-ordinate": "LayoutWidth - 400"
+															}
+														}
+													],
+													"actions": [],
+													"sid": 213120482550144,
+													"children": [
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "is-overlapping-another-object",
+																	"objectClass": "path_tile_basic",
+																	"sid": 681425671640758,
+																	"parameters": {
+																		"object": "path_node"
+																	}
+																},
+																{
+																	"id": "compare-two-values",
+																	"objectClass": "System",
+																	"sid": 268710090458417,
+																	"parameters": {
+																		"first-value": "path_node.ImagePointX(2)",
+																		"comparison": 5,
+																		"second-value": "LayoutWidth"
+																	}
+																}
+															],
+															"actions": [
+																{
+																	"id": "create-object",
+																	"objectClass": "System",
+																	"sid": 135516989817604,
+																	"parameters": {
+																		"object-to-create": "path_tile_entrance",
+																		"layer": "0",
+																		"x": "path_tile_basic.X + 400",
+																		"y": "path_tile_basic.Y",
+																		"create-hierarchy": false,
+																		"template-name": "\"\""
+																	}
+																}
+															],
+															"sid": 825535022039932
+														},
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "else",
+																	"objectClass": "System",
+																	"sid": 459659878133504
+																}
+															],
+															"actions": [
+																{
+																	"id": "create-object",
+																	"objectClass": "System",
+																	"sid": 610721982966223,
+																	"parameters": {
+																		"object-to-create": "path_tile_wall",
+																		"layer": "0",
+																		"x": "path_tile_basic.X + 400",
+																		"y": "path_tile_basic.Y",
+																		"create-hierarchy": false,
+																		"template-name": "\"\""
+																	}
+																}
+															],
+															"sid": 961422058946653
+														}
+													]
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-y",
+															"objectClass": "path_tile_basic",
+															"sid": 178970397392736,
+															"parameters": {
+																"comparison": 0,
+																"y-co-ordinate": "LayoutHeight - 400"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "create-object",
+															"objectClass": "System",
+															"sid": 513898101105914,
+															"parameters": {
+																"object-to-create": "path_tile_wall",
+																"layer": "0",
+																"x": "path_tile_basic.X",
+																"y": "path_tile_basic.Y + 400",
+																"create-hierarchy": false,
+																"template-name": "\"\""
+															}
+														}
+													],
+													"sid": 105227789020335
+												},
+												{
+													"eventType": "block",
+													"conditions": [],
+													"actions": [
+														{
+															"id": "add-to-eventvar",
+															"objectClass": "System",
+															"sid": 283173534717822,
+															"parameters": {
+																"variable": "loopindexX",
+																"value": "400"
+															}
+														},
+														{
+															"id": "wait",
+															"objectClass": "System",
+															"sid": 177176565251781,
+															"parameters": {
+																"seconds": "waittime"
+															}
+														},
+														{
+															"callFunction": "Render tiles",
+															"sid": 443070231882357
+														}
+													],
+													"sid": 159658926179548
+												}
+											]
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 641085461777908,
+											"parameters": {
+												"variable": "loopindexX",
+												"comparison": 5,
+												"value": "LayoutWidth"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 404502832514896,
+											"parameters": {
+												"variable": "loopindexY",
+												"value": "400"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 641962607491415,
+											"parameters": {
+												"variable": "loopindexX",
+												"value": "0"
+											}
+										},
+										{
+											"id": "wait",
+											"objectClass": "System",
+											"sid": 202357373781928,
+											"parameters": {
+												"seconds": "waittime"
+											}
+										},
+										{
+											"callFunction": "Render tiles",
+											"sid": 966887376269837
+										}
+									],
+									"sid": 411651773834674
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 789439247708508,
+									"parameters": {
+										"variable": "loopindexY",
+										"comparison": 5,
+										"value": "LayoutHeight"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "browser",
+									"sid": 516094265413708,
+									"parameters": {
+										"type": "log",
+										"message": "\"walls placed\""
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 196858049348409,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								}
+							],
+							"sid": 876909288750375,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 704455522472971,
+											"parameters": {
+												"object": "path_tile_wall"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 834681707851539,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "is-overlapping-another-object",
+													"objectClass": "path_tile_wall",
+													"sid": 596882807199250,
+													"parameters": {
+														"object": "path_node"
+													}
+												},
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 770568148515037,
+													"parameters": {
+														"first-value": "path_node.ImagePointX(2)",
+														"comparison": 5,
+														"second-value": "LayoutWidth"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "spawn-another-object",
+													"objectClass": "path_tile_wall",
+													"sid": 221277130678203,
+													"parameters": {
+														"object": "path_tile_entrance",
+														"layer": "0",
+														"image-point": "0",
+														"create-hierarchy": false,
+														"template-name": "\"\""
+													}
+												},
+												{
+													"id": "destroy",
+													"objectClass": "path_tile_wall",
+													"sid": 335545373597788
+												}
+											],
+											"sid": 988621840474184
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 827538637674463,
+											"parameters": {
+												"object": "path_tile_basic"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 627947216272174,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-nearestfurthest",
+													"objectClass": "path_tile_wall",
+													"sid": 277987676528794,
+													"parameters": {
+														"which": "nearest",
+														"x": "path_tile_basic.X",
+														"y": "path_tile_basic.Y"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 719525147305067,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 444870393821602,
+															"parameters": {
+																"first-value": "distance(path_tile_basic.X, path_tile_basic.Y, path_tile_wall.X, path_tile_wall.Y)",
+																"comparison": 5,
+																"second-value": "600"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "spawn-another-object",
+															"objectClass": "path_tile_basic",
+															"sid": 509179344271286,
+															"parameters": {
+																"object": "path_tile_room",
+																"layer": "0",
+																"image-point": "0",
+																"create-hierarchy": false,
+																"template-name": "\"\""
+															}
+														},
+														{
+															"id": "destroy",
+															"objectClass": "path_tile_basic",
+															"sid": 912343339979348
+														}
+													],
+													"sid": 280157007228277
+												}
+											]
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 661640147585361,
+											"parameters": {
+												"object": "path_tile_basic"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 447601186797205,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-nearestfurthest",
+													"objectClass": "path_tile_room",
+													"sid": 703986594999652,
+													"parameters": {
+														"which": "nearest",
+														"x": "path_tile_basic.X",
+														"y": "path_tile_basic.Y"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 690921155267643,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 680948804279586,
+															"parameters": {
+																"first-value": "distance(path_tile_basic.X, path_tile_basic.Y, path_tile_room.X, path_tile_room.Y)",
+																"comparison": 5,
+																"second-value": "3000"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "spawn-another-object",
+															"objectClass": "path_tile_basic",
+															"sid": 762297890250990,
+															"parameters": {
+																"object": "path_tile_far",
+																"layer": "0",
+																"image-point": "0",
+																"create-hierarchy": false,
+																"template-name": "\"\""
+															}
+														},
+														{
+															"id": "destroy",
+															"objectClass": "path_tile_basic",
+															"sid": 298196921875994
+														}
+													],
+													"sid": 674116347725041
+												}
+											]
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 901244496183409,
+											"parameters": {
+												"object": "path_tile_room"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 898537637812159,
+									"disabled": true,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-nearestfurthest",
+													"objectClass": "path_tile_far",
+													"sid": 750328086138320,
+													"parameters": {
+														"which": "furthest",
+														"x": "path_tile_room.X",
+														"y": "path_tile_room.Y"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "spawn-another-object",
+													"objectClass": "path_tile_far",
+													"sid": 445763449332579,
+													"parameters": {
+														"object": "path_tile_farthest",
+														"layer": "0",
+														"image-point": "0",
+														"create-hierarchy": false,
+														"template-name": "\"\""
+													}
+												},
+												{
+													"id": "destroy",
+													"objectClass": "path_tile_far",
+													"sid": 483689597690106
+												}
+											],
+											"sid": 666007528885363,
+											"disabled": true
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "path_tile_entrance",
+							"sid": 969943851498449,
+							"parameters": {
+								"object": "path_tile_entrance"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 735209542336815,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 603358741127493,
+									"parameters": {
+										"object": "path_tile_entrance"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "path_tile_entrance",
+									"sid": 598737621349830
+								}
+							],
+							"sid": 656434651397243
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "path_tile_farthest",
+							"sid": 801654166828130,
+							"parameters": {
+								"object": "path_tile_farthest"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 521303207564367,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-highest-lowest-value",
+									"objectClass": "System",
+									"sid": 365910760539398,
+									"parameters": {
+										"object": "path_tile_farthest",
+										"which": "highest",
+										"expression": "path_tile_farthest.UID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "path_tile_farthest",
+									"sid": 385034836191709
+								}
+							],
+							"sid": 842980246409298
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 995488988398396,
+							"parameters": {
+								"first-value": "path_tile_room.Count",
+								"comparison": 4,
+								"second-value": "0"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 501764485503887
+						}
+					],
+					"actions": [],
+					"sid": 924618797161722,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-time",
+									"objectClass": "System",
+									"sid": 748133008541963,
+									"parameters": {
+										"comparison": 4,
+										"time-seconds": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "browser",
+									"sid": 601712266574860,
+									"parameters": {
+										"type": "log",
+										"message": "\"rooms detected\""
+									}
+								}
+							],
+							"sid": 717405325965111
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 198249075588646,
+							"parameters": {
+								"first-value": "path_tile_far.Count",
+								"comparison": 4,
+								"second-value": "0"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 471588439910669
+						}
+					],
+					"actions": [],
+					"sid": 571378623255253,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-time",
+									"objectClass": "System",
+									"sid": 370684371218656,
+									"parameters": {
+										"comparison": 4,
+										"time-seconds": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "browser",
+									"sid": 130934212582346,
+									"parameters": {
+										"type": "log",
+										"message": "\"far areas detected\""
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "browser",
+									"sid": 198899049087103,
+									"disabled": true,
+									"parameters": {
+										"type": "warn",
+										"message": "\"generation finished (\" & path_node.Count & \" nodes, \" & path_subnode.Count & \" subnodes, \" & path_subsubnode.Count & \" subsubnodes)\""
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 315079848662200,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								}
+							],
+							"sid": 722862605234103,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 461446267069008,
+											"parameters": {
+												"object": "path_node"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 646903024918353,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-nearestfurthest",
+													"objectClass": "path_tile_far",
+													"sid": 177155490456255,
+													"parameters": {
+														"which": "furthest",
+														"x": "path_node.X",
+														"y": "path_node.Y"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "spawn-another-object",
+													"objectClass": "path_tile_far",
+													"sid": 593020720138154,
+													"parameters": {
+														"object": "path_tile_farthest",
+														"layer": "0",
+														"image-point": "0",
+														"create-hierarchy": false,
+														"template-name": "\"\""
+													}
+												},
+												{
+													"id": "destroy",
+													"objectClass": "path_tile_far",
+													"sid": 642590119714154
+												}
+											],
+											"sid": 277879812122555
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 550676351557642,
+							"parameters": {
+								"first-value": "path_tile_farthest.Count",
+								"comparison": 4,
+								"second-value": "0"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 868869991781762
+						}
+					],
+					"actions": [],
+					"sid": 882780869177797,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-time",
+									"objectClass": "System",
+									"sid": 941085665325527,
+									"parameters": {
+										"comparison": 4,
+										"time-seconds": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "browser",
+									"sid": 919015699450707,
+									"parameters": {
+										"type": "log",
+										"message": "\"farthest areas detected\""
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 790247412484685,
+									"parameters": {
+										"seconds": "waittime"
+									}
+								},
+								{
+									"callFunction": "Add farthest areas",
+									"sid": 423588992142370
+								}
+							],
+							"sid": 295494650316702
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 374198099513345,
+							"parameters": {
+								"first-value": "path_tile_farthest.Count",
+								"comparison": 2,
+								"second-value": "5"
+							}
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 759422217170709,
+							"parameters": {
+								"first-value": "path_tile_far.Count",
+								"comparison": 4,
+								"second-value": "1"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 513687503843183,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-random-instance",
+									"objectClass": "System",
+									"sid": 627334772655864,
+									"parameters": {
+										"object": "path_tile_far"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 926760463819526,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-nearestfurthest",
+											"objectClass": "path_tile_basic",
+											"sid": 403228418056348,
+											"parameters": {
+												"which": "nearest",
+												"x": "path_tile_far.X",
+												"y": "path_tile_far.Y"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 688782456042288,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 282270467216378,
+													"parameters": {
+														"first-value": "distance(path_tile_far.X, path_tile_far.Y, path_tile_basic.X, path_tile_basic.Y)",
+														"comparison": 5,
+														"second-value": "600"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "spawn-another-object",
+													"objectClass": "path_tile_far",
+													"sid": 657536478668770,
+													"parameters": {
+														"object": "path_tile_farthest",
+														"layer": "0",
+														"image-point": "0",
+														"create-hierarchy": false,
+														"template-name": "\"\""
+													}
+												},
+												{
+													"id": "destroy",
+													"objectClass": "path_tile_far",
+													"sid": 636467878842045
+												},
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 169264562211462,
+													"disabled": true,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"callFunction": "Add farthest areas",
+													"sid": 892964779557827,
+													"disabled": true
+												}
+											],
+											"sid": 259739615974658
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 289206539019126,
+													"parameters": {
+														"first-value": "distance(path_tile_far.X, path_tile_far.Y, path_tile_basic.X, path_tile_basic.Y)",
+														"comparison": 2,
+														"second-value": "600"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "spawn-another-object",
+													"objectClass": "path_tile_far",
+													"sid": 884470068918351,
+													"parameters": {
+														"object": "path_tile_basic",
+														"layer": "0",
+														"image-point": "0",
+														"create-hierarchy": false,
+														"template-name": "\"\""
+													}
+												},
+												{
+													"id": "destroy",
+													"objectClass": "path_tile_far",
+													"sid": 523427251956028
+												},
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 262581696088364,
+													"disabled": true,
+													"parameters": {
+														"seconds": "waittime"
+													}
+												},
+												{
+													"callFunction": "Add farthest areas",
+													"sid": 278631258988821
+												}
+											],
+											"sid": 901231651374450,
+											"disabled": true
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 383945807217734,
+							"parameters": {
+								"first-value": "path_tile_farthest.Count",
+								"comparison": 4,
+								"second-value": "5"
+							}
+						},
+						{
+							"id": "every-x-seconds",
+							"objectClass": "System",
+							"sid": 463549189156221,
+							"parameters": {
+								"interval-seconds": "waittime"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 508404999807297,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-random-instance",
+									"objectClass": "System",
+									"sid": 518663822984681,
+									"parameters": {
+										"object": "path_tile_farthest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "spawn-another-object",
+									"objectClass": "path_tile_farthest",
+									"sid": 789096252670921,
+									"parameters": {
+										"object": "path_tile_far",
+										"layer": "0",
+										"image-point": "0",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "destroy",
+									"objectClass": "path_tile_farthest",
+									"sid": 644268307947973
+								}
+							],
+							"sid": 616114730093138,
+							"disabled": true
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 936973979788299,
+							"parameters": {
+								"first-value": "path_tile_farthest.Count",
+								"comparison": 0,
+								"second-value": "5"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 973837402902911
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 226285833366307,
+							"parameters": {
+								"type": "warn",
+								"message": "\"generation finished (\" & path_node.Count & \" nodes, \" & path_subnode.Count & \" subnodes, \" & path_subsubnode.Count & \" subsubnodes, \" & path_tile_farthest.Count & \" farthests)\""
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "NODES",
+							"sid": 374621509196239
+						},
+						{
+							"id": "stop-timer",
+							"objectClass": "path_alignment",
+							"sid": 877495362396095,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"farthest\""
+							}
+						}
+					],
+					"sid": 813192922282769
+				},
+				{
+					"functionName": "Add farthest areas",
+					"functionDescription": "Adds a sufficient number of farthest areas.",
+					"functionCategory": "Tiles",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "browser",
+							"sid": 798243642402758,
+							"parameters": {
+								"type": "log",
+								"message": "\"farthest areas added\""
+							}
+						}
+					],
+					"sid": 399462051663800,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 382655450364230,
+									"parameters": {
+										"first-value": "path_tile_farthest.Count",
+										"comparison": 2,
+										"second-value": "5"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 156086115123706,
+							"disabled": true,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-random-instance",
+											"objectClass": "System",
+											"sid": 996181047818704,
+											"parameters": {
+												"object": "path_tile_far"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 739761401473668,
+									"disabled": true,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-nearestfurthest",
+													"objectClass": "path_tile_basic",
+													"sid": 521216033496426,
+													"parameters": {
+														"which": "nearest",
+														"x": "path_tile_far.X",
+														"y": "path_tile_far.Y"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 792947421931428,
+											"disabled": true,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 242030933405058,
+															"parameters": {
+																"first-value": "distance(path_tile_far.X, path_tile_far.Y, path_tile_basic.X, path_tile_basic.Y)",
+																"comparison": 5,
+																"second-value": "600"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "spawn-another-object",
+															"objectClass": "path_tile_far",
+															"sid": 262492848513650,
+															"parameters": {
+																"object": "path_tile_farthest",
+																"layer": "0",
+																"image-point": "0",
+																"create-hierarchy": false,
+																"template-name": "\"\""
+															}
+														},
+														{
+															"id": "destroy",
+															"objectClass": "path_tile_far",
+															"sid": 418211026868203
+														},
+														{
+															"id": "wait",
+															"objectClass": "System",
+															"sid": 117020721530822,
+															"parameters": {
+																"seconds": "waittime"
+															}
+														},
+														{
+															"callFunction": "Add farthest areas",
+															"sid": 615889107400135
+														}
+													],
+													"sid": 139929316557031,
+													"disabled": true
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 696315385386408,
+															"parameters": {
+																"first-value": "distance(path_tile_far.X, path_tile_far.Y, path_tile_basic.X, path_tile_basic.Y)",
+																"comparison": 2,
+																"second-value": "600"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "spawn-another-object",
+															"objectClass": "path_tile_far",
+															"sid": 520918879689944,
+															"parameters": {
+																"object": "path_tile_basic",
+																"layer": "0",
+																"image-point": "0",
+																"create-hierarchy": false,
+																"template-name": "\"\""
+															}
+														},
+														{
+															"id": "destroy",
+															"objectClass": "path_tile_far",
+															"sid": 414143790581473
+														},
+														{
+															"id": "wait",
+															"objectClass": "System",
+															"sid": 733860323457965,
+															"parameters": {
+																"seconds": "waittime"
+															}
+														},
+														{
+															"callFunction": "Add farthest areas",
+															"sid": 762629794845614
+														}
+													],
+													"sid": 121780398371333,
+													"disabled": true
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			],
+			"sid": 810934941201535
+		}
+	],
+	"sid": 440968572766654
+}
